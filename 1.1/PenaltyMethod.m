@@ -1,6 +1,6 @@
 clear all,clc
 
-startingPoint=[1,1];
+startingPoint=[1,2];
 my=[1,10,100,1000];
 stepLength=1e-4;
 threshold=1e-6;

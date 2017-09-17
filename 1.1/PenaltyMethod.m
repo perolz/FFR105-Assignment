@@ -13,4 +13,5 @@ for i=1:length(my)
   result(i,2:3)=zero;
 end
 
-fprintf('%4.2f %1.3f %1.3f \n',result')
+disp('  mu    x1    x2')
+fprintf('%4.0f %1.3f %1.3f \n',result')

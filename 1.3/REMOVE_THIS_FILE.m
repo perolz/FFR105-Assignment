@@ -1,19 +1,19 @@
-clear all, clc
+  clear all, clc
 
 fileID=fopen('ForReport.txt','a');
-fmt='%5d %5d %5d %5d\n';
+fmt='%3.2f %3.2f %3.2f %3.2f %3.2f\n';
 
 numberOfGenes = 100;
 variableRange = 5;
-numberOfGenerations = 40;
+numberOfGenerations = 100;
 numberOfVariables=2;
 
 
-populationSize= 30;
+populationSize= 40;
 crossoverProbability = 0.8;
 mutationProbability = 0.025;
 tournamentSelectionParameter = 0.70;
-tournamentSize=2;
+tournamentSize=4;
 average=[];
 
 for k=1:3
@@ -32,7 +32,6 @@ population = InitializePopulation(populationSize,numberOfGenes);
       for i = 1:populationSize
         chromosome = population(i,:);
         x=DecodeChromosome(chromosome,numberOfVariables,variableRange);
-        decodedPopulation(i,:)=x; %For plot
         fitness(i) = EvaluateIndividual(x);
         if(fitness(i)>maximumFitness)
           maximumFitness = fitness(i);
@@ -76,9 +75,11 @@ population = InitializePopulation(populationSize,numberOfGenes);
     average(k2,:)=[xBest 1/maximumFitness];
 end
   average=mean(average);
-  tmp=[tournamentSize tournamentSelectionParameter average(1) average(2)];
+  disp(average)
+  tmp=[tournamentSize tournamentSelectionParameter average(1) average(2) average(3)];
   fprintf(fileID,fmt,tmp);
   tournamentSelectionParameter=tournamentSelectionParameter+0.1;
 end
+fprintf(fileID,fmt,[]);
 disp(average)
 fclose(fileID);
